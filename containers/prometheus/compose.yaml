@@ -1,0 +1,10 @@
+services:
+  prometheus:
+    image: prom/prometheus:v3.9.1
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - /home/atlas/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/calebh/secrets/esphome_web_passwd:/esphome_web_passwd
+    restart: unless-stopped

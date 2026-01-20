@@ -9,6 +9,9 @@
     volumes = [
       "/home/atlas/prometheus.yml:/etc/prometheus/prometheus.yml"
     ];
+    networks = [
+      "traefik"
+    ];
     labels = {
       "traefik.enable" = "true;"
       "traefik.docker.network" = "traefik";

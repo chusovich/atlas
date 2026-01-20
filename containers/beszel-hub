@@ -21,3 +21,7 @@ services:
       traefik.http.routers.beszel-hub-secure.entrypoints: https
       traefik.http.routers.beszel-hub-secure.rule: Host(`beszel.services.husovich.com`)
       traefik.http.routers.beszel-hub-secure.tls.certresolver: myresolver
+
+networks:
+  traefik:
+    external: true

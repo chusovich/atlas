@@ -22,7 +22,7 @@ scrape_configs:
   - job_name: esphome
     basic_auth:
       username: "admin"
-      password_file: "/esphome_web_passwd"
+      password_file: "/secrets/esphome_web_passwd"
     static_configs:
       - targets:
           - "192.168.10.193"

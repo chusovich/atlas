@@ -14,4 +14,26 @@ Any x86_64 machine with some ethernet ports will do, but see [my Hardware setup]
 
 ## Installation
 
+## Examples
+### Example Prometheus Config
+loaded from `/home/atlas/prometheus.yml`
+```yaml
+scrape_configs:
+  - job_name: esphome
+    basic_auth:
+      username: "admin"
+      password_file: "/esphome_web_passwd"
+    static_configs:
+      - targets:
+          - "192.168.10.193"
+          - "192.168.10.237"
+
+  - job_name: servers
+    static_configs:
+      - targets:
+          - "192.168.10.56:9100" 
+          - "192.168.10.124:9100" 
+          - "192.168.10.167:9100"
+```
+
 ## References

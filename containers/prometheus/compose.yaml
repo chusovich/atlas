@@ -2,9 +2,24 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
-    ports:
-      - 9090:9090
+    restart: unless-stopped
+    networks:
+      - traefik
+    # ports:
+    #   - 9090:9090
     volumes:
       - /home/atlas/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /home/calebh/secrets/esphome_web_passwd:/esphome_web_passwd
-    restart: unless-stopped
+    labels:
+      traefik.docker.network: traefik
+      traefik.enable: "true"
+      traefik.http.routers.prometheus-secure.entrypoints: https
+      traefik.http.routers.prometheus-secure.middlewares: traefik-https-redirect
+      traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme: https
+      traefik.http.routers.prometheus-secure.rule: Host(`prometheus.services.husovich.com`)
+      traefik.http.routers.prometheus-secure.service: prometheus
+      traefik.http.routers.prometheus-secure.tls: "true"
+      traefik.http.routers.prometheus-secure.tls.certresolver: myresolver
+      traefik.http.routers.prometheus.entrypoints: http
+      traefik.http.routers.prometheus.rule: Host(`prometheus.services.husovich.com`)
+      traefik.http.services.prometheus.loadbalancer.server.port: "9090"
+

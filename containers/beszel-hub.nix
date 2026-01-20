@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers.beszel-hub = {
     image = "henrygd/beszel:0.18.2";
     hostname = "beszel-hub";

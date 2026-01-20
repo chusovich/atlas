@@ -6,3 +6,4 @@
 - Gigabyte B460M D3SH V2 Motherboard
 - Intel Core i3-10100T CPU
 - Intel X540-T2 Dual Port 10G PCIe Card
+- Seasonic M12II 520W Bronze 80+ PSU

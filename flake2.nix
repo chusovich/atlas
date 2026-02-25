@@ -30,7 +30,7 @@ nixConfig = {
       specialArgs = { inherit nixos-raspberrypi ; };
       modules = [
         disko.nixosModules.disko
-        nix-core.modules
+        nix-core.serverModules.default
         ./configuration.nix
         ({ config, pkgs, lib, nixos-raspberrypi, ... }: {
           imports = with nixos-raspberrypi.nixosModules; [

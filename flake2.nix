@@ -17,6 +17,10 @@ nixConfig = {
   inputs = {
     nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi?shallow=1";
+    nix-core = {
+      url = "github:chusovich/nix-core/0.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixos-raspberrypi, disko }: 
@@ -25,7 +29,8 @@ nixConfig = {
       system = "aarch64-linux";
       specialArgs = { inherit nixos-raspberrypi ; };
       modules = [
-        disko.nixosModules.disko        
+        disko.nixosModules.disko
+        nix-core.modules
         ./configuration.nix
         ({ config, pkgs, lib, nixos-raspberrypi, ... }: {
           imports = with nixos-raspberrypi.nixosModules; [

@@ -10,7 +10,6 @@
   outputs = { self, nixpkgs, nix-core, ... }: {
     nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-
       modules = [
         ./configuration.nix   
         nix-core.serverModules.default

@@ -1,0 +1,35 @@
+services:
+  beszel-hub:
+    image: henrygd/beszel:0.18.4
+    container_name: beszel-hub
+    restart: unless-stopped
+    # ports:
+    #  - 8090:8090
+    volumes:
+      - /home/calebh/app-data/beszel/data:/beszel_data
+      - /home/calebh/app-data/beszel/socket:/beszel_socket
+    networks:
+      traefik:
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      # HTTP
+      traefik.http.routers.beszel-http.rule: Host(`beszel.tiny-apps.husovich.com`)
+      traefik.http.routers.beszel-http.entrypoints: http
+      traefik.http.routers.beszel-http.service: beszel
+      traefik.http.routers.beszel-http.middlewares: redirect-https
+      # HTTP Redirect
+      traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
+      traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
+      # HTTPS
+      traefik.http.routers.beszel-https.rule: Host(`beszel.tiny-apps.husovich.com`)
+      traefik.http.routers.beszel-https.entrypoints: https
+      traefik.http.routers.beszel-https.service: beszel
+      traefik.http.routers.beszel-https.tls: true
+      traefik.http.routers.beszel-https.tls.certresolver: myresolver
+      # Load Balancer      
+      traefik.http.services.beszel.loadbalancer.server.port: 8090
+
+networks:
+  traefik:
+    external: true

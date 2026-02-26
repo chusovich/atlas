@@ -8,21 +8,8 @@
   imports =
     [ 
       ./hardware-configuration.nix # Include the results of the hardware scan.
-      /home/calebh/infrastructure/nix/housekeeping.nix # auto-updates, garbage collection
-      /home/calebh/infrastructure/nix/servers.nix # auto-updates, garbage collection
-      /home/calebh/infrastructure/nix/prometheus-exporter.nix # expose stats to prometheus
     ];
 
-  # Build on a remote host since the pi is underpowered
-  nix.distributedBuilds = true;
-  nix.buildMachines = [
-    {
-      hostName = "zeus";
-      sshUser = "builder";
-      system = "aarch64-linux";
-    }
-  ];
-  
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
@@ -30,7 +17,6 @@
 
   # Network Configuration
   networking = {
-    firewall.enable = false;
     hostName = "atlas";
     interfaces = {
       end0 = {

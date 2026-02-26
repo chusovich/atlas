@@ -1,0 +1,36 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    #ports:
+    #  - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/calebh/app-data/prometheus:/prometheus
+      - /home/calebh/secrets/esphome_web_passwd:/esphome_web_passwd
+    restart: unless-stopped
+     networks:
+      traefik:
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik
+      # HTTP
+      traefik.http.routers.prometheus-http.rule: Host(`prometheus.tiny-apps.husovich.com`)
+      traefik.http.routers.prometheus-http.entrypoints: http
+      traefik.http.routers.prometheus-http.service: prometheus
+      traefik.http.routers.prometheus-http.middlewares: redirect-https
+      # HTTP Redirect
+      traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
+      traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
+      # HTTPS
+      traefik.http.routers.prometheus-https.rule: Host(`prometheus.tiny-apps.husovich.com`)
+      traefik.http.routers.prometheus-https.entrypoints: https
+      traefik.http.routers.prometheus-https.service: prometheus
+      traefik.http.routers.prometheus-https.tls: true
+      traefik.http.routers.prometheus-https.tls.certresolver: myresolver
+      # Load Balancer      
+      traefik.http.services.prometheus.loadbalancer.server.port: 3000
+   
+networks:
+  traefik:
+    external: true

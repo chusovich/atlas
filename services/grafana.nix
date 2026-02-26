@@ -11,7 +11,6 @@
         enforce_domain = false;
         enable_gzip = true;
         domain = "grafana.services.husovich.com";
-
       };
     };
   };

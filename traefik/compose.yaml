@@ -1,8 +1,8 @@
 services:
   # Traefik Reverse Proxy
   traefik:
-    extends: 
-      file: ../containers/traefik.yml
+    extends:
+      file: ../containers/traefik.yaml
       service: traefik
     profiles:
       - proxy
@@ -12,20 +12,20 @@ services:
     secrets:
       - cf-dns-api-token
     labels:
-      traefik.http.routers.traefik-secure.tls.domain[0].sans: "*.tiny-apps.husovich.com"
-      traefik.http.routers.traefik.rule: Host(`traefik.tiny-apps.husovich.com`)
-      traefik.http.routers.traefik-secure.rule: Host(`traefik.tiny-apps.husovich.com`)
+      traefik.http.routers.traefik-secure.tls.domain[0].sans: "*.services.husovich.com"
+      traefik.http.routers.traefik.rule: Host(`traefik.services.husovich.com`)
+      traefik.http.routers.traefik-secure.rule: Host(`traefik.services.husovich.com`)
 
   # Traefik Debugging Container
   whoami:
     extends:
-      file: ../containers/traefik.yml
+      file: ../containers/traefik.yaml
       service: whoami
     profiles:
       - proxy-debug
     labels:
-      traefik.http.routers.whoami-web.rule: Host(`whoami.tiny-apps.husovich.com`)
-      traefik.http.routers.whoami-websecure.rule: Host(`whoami.tiny-apps.husovich.com`)
+      traefik.http.routers.whoami-web.rule: Host(`whoami.services.husovich.com`)
+      traefik.http.routers.whoami-websecure.rule: Host(`whoami.services.husovich.com`)
 
 secrets:
   cf-dns-api-token:

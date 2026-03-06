@@ -13,7 +13,7 @@ services:
       traefik.enable: true
       traefik.docker.network: traefik
       # HTTP
-      traefik.http.routers.grafana-http.rule: Host(`grafana.tiny-apps.husovich.com`)
+      traefik.http.routers.grafana-http.rule: Host(`grafana.services.husovich.com`)
       traefik.http.routers.grafana-http.entrypoints: http
       traefik.http.routers.grafana-http.service: grafana
       traefik.http.routers.grafana-http.middlewares: redirect-https
@@ -21,14 +21,14 @@ services:
       traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
       traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
       # HTTPS
-      traefik.http.routers.grafana-https.rule: Host(`grafana.tiny-apps.husovich.com`)
+      traefik.http.routers.grafana-https.rule: Host(`grafana.services.husovich.com`)
       traefik.http.routers.grafana-https.entrypoints: https
       traefik.http.routers.grafana-https.service: grafana
       traefik.http.routers.grafana-https.tls: true
       traefik.http.routers.grafana-https.tls.certresolver: myresolver
       # Load Balancer      
       traefik.http.services.grafana.loadbalancer.server.port: 3000
-   
+
 networks:
   traefik:
     external: true

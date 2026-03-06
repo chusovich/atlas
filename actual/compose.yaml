@@ -18,7 +18,7 @@ services:
       traefik.enable: true
       traefik.docker.network: traefik
       # HTTP
-      traefik.http.routers.actual-http.rule: Host(`budget.tiny-apps.husovich.com`)
+      traefik.http.routers.actual-http.rule: Host(`budget.services.husovich.com`)
       traefik.http.routers.actual-http.entrypoints: http
       traefik.http.routers.actual-http.service: actual
       traefik.http.routers.actual-http.middlewares: redirect-https
@@ -26,7 +26,7 @@ services:
       traefik.http.middlewares.redirect-https.redirectScheme.scheme: https
       traefik.http.middlewares.redirect-https.redirectScheme.permanent: true
       # HTTPS
-      traefik.http.routers.actual-https.rule: Host(`budget.tiny-apps.husovich.com`)
+      traefik.http.routers.actual-https.rule: Host(`budget.services.husovich.com`)
       traefik.http.routers.actual-https.entrypoints: https
       traefik.http.routers.actual-https.service: actual
       traefik.http.routers.actual-https.tls: true

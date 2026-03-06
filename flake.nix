@@ -8,7 +8,7 @@
   };
 
   outputs = { self, nixpkgs, nix-core, ... }: {
-    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix   

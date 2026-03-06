@@ -16,6 +16,14 @@
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
 
+  # Default user account
+  users.users.calebh = {
+    isNormalUser = true;
+    description = "Caleb Husovich";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [ helix git ];
+  };
+
   # Tailscale
   services.tailscale = {
     enable = true;

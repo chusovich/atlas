@@ -4,7 +4,7 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     environment:
-      DOMAIN: "https://passwords.servicess.husovich.com"  # required when using a reverse proxy; your domain; vaultwarden needs to know it's https to work properly with attachments
+      DOMAIN: "https://passwords.services.husovich.com"  # required when using a reverse proxy; your domain; vaultwarden needs to know it's https to work properly with attachments
       SIGNUPS_ALLOWED: "true" # Deactivate this with "false" after you have created your account so that no strangers can register
     volumes:
       - /home/calebh/app-data/vaultwarden:/data

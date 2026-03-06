@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772763838,
-        "narHash": "sha256-4yOEIZvIyvzzkqXXPL+Ms7FWqPpkAT7s3ztbJxzVvKk=",
+        "lastModified": 1772765129,
+        "narHash": "sha256-Hh2R98vc/M/hcu2x+YVk5WTwIp0la3BEuYx+lS988Jc=",
         "owner": "chusovich",
         "repo": "nix-core",
-        "rev": "ab78072125a1aac21e0e99267cae7f8894164022",
+        "rev": "8f56dd1ce05b7ca82aa9583c3dc54d9b252e77c1",
         "type": "github"
       },
       "original": {

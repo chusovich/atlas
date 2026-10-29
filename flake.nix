@@ -1,18 +1,18 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nix-core = {
-      url = "github:chusovich/nix-core/0.1.0";
+      url = "github:chusovich/nix-core/v2026.10.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { self, nixpkgs, nix-core, ... }: {
     nixosConfigurations.atlas = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = "aarch64";
       modules = [
         ./configuration.nix   
-        nix-core.serverModules.default
+        nix-core.nixosModules.default
       ];
     };
   };

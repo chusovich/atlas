@@ -10,7 +10,7 @@
       ./hardware-configuration.nix # Include the results of the hardware scan.
     ];
 
-  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+  # Use the extlinux boot loader (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
 
   # Enables the generation of /boot/extlinux/extlinux.conf
@@ -21,18 +21,8 @@
     isNormalUser = true;
     description = "Caleb Husovich";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [ helix git ];
-  };
-
-  # Tailscale
-  services.tailscale = {
-    enable = true;
-    authKeyFile = "/home/calebh/secrets/tailscale_key";
-    extraUpFlags = [
-      "--reset"
-      "--ssh"
-      "--advertise-tags tag:server"
-    ];
+    packages = with pkgs; [  ];
+    initialPassword = "password";
   };
 
   # Network Configuration
@@ -50,11 +40,6 @@
     defaultGateway = "192.168.10.1";
     nameservers = [ "192.168.10.1" ];
   };
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

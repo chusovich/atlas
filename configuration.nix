@@ -19,14 +19,13 @@
   # Default user account
   users.users.calebh = {
     isNormalUser = true;
-    description = "Caleb Husovich";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [  ];
-    initialPassword = "password";
   };
 
   # Network Configuration
   networking = {
+    firewall.enable = true;
     hostName = "atlas";
     interfaces = {
       end0 = {
